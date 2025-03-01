@@ -22,4 +22,4 @@ jobs:
                   export PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
             - name: Run Tests
               run: |
-                  pytest -s tests/part_01/test_user.py
+                  pytest -s tests/part_01/test_users.py
