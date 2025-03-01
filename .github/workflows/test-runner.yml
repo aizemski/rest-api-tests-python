@@ -2,7 +2,12 @@ name: Python Test Runner
 
 run-name: REST API Python Test
 
-on: push
+on:
+    schedule:
+        - cron: "*/2 * * * *"
+    push:
+        branches:
+            - main
 
 jobs:
     Run-Tests:
@@ -22,7 +27,7 @@ jobs:
             - name: Run Tests
               run: |
                   export PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
-                  pytest -s tests/part_01/test_users.py --junitxml=test-results.xml --html=test-results.html
+                  pytest -s tests/part_01/test_users.py --junitxml=test-results.xml --html=test-results.html --self-contained-html
             - name: Test Results Summary
               uses: test-summary/action@dist
               if: success() || failure()
