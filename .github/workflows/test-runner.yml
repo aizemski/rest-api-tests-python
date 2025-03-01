@@ -22,4 +22,9 @@ jobs:
             - name: Run Tests
               run: |
                   export PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
-                  pytest -s tests/part_01/test_users.py
+                  pytest -s tests/part_01/test_users.py --junitxml=test-results.xml
+            - name: Test Results Summary
+              uses: test-summary/action@dist
+              if: success() || failure()
+              with:
+                  paths: test-results.xml
